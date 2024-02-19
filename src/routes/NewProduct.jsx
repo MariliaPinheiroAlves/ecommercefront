@@ -1,6 +1,6 @@
 import url from "../axios/config";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; //simular o redirect para home
+import { useNavigate } from "react-router-dom";
 import "./NewProduct.css"
 
 const NewProduct = () => {
@@ -13,7 +13,7 @@ const NewProduct = () => {
     const createProduct = async (event) => {
         event.preventDefault();
 
-        const product = {title, price, description, userId: 1}; //esse userId setado é só pra essa API
+        const product = {title, price, description, userId: 1};
 
         await url.post("/posts", {
             body: product
@@ -48,19 +48,6 @@ const NewProduct = () => {
                         onChange={(event) => setPrice(event.target.value)}
                     />
                 </div>
-                {/* <div className='form-control'>
-                    <label htmlFor="description">Description:</label>
-                    <textarea
-                        name='description'
-                        id='description'
-                        placeholder='Enter product description...'
-                        onChange={(event) => setDescription(event.target.value)}
-                    ></textarea>
-                </div> 
-
-                tá dando problema com o uso de textarea
-                
-                */}
                 <div className='form-control'>
                     <label htmlFor="photo">Photo:</label>
                     <input 
