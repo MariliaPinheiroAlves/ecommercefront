@@ -1,6 +1,6 @@
 import url from "../axios/config";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; //busca o id que esta na url
+import { useParams } from "react-router-dom";
 import "./Product.css"
 
 const Product = () => {
