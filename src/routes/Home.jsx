@@ -7,11 +7,8 @@ import "./Home.css";
 const Home = () => {
 
     const [ product, setProduct ] = useState([]);
-    //esse product automaticamente vira um array vazio
-    //setProduct ganha a habilidade de modificar o valor do product
 
     const getProduct = async() => {
-        //fake API
         try {
             const response = await url.get("/posts");
             const data = response.data
@@ -33,10 +30,7 @@ const Home = () => {
         getProduct();
     }, [])
     
-    //essa função resgata os dados da API por isso precisa ser assincrona
-    useEffect(() => {
-        //para executar essa função eu preciso usar o useEffect, porque agora eu posso coordenar a execução dessa função, se eu não fizer isso a cada renderização do componente a função getProduct vai ser executada
-        
+    useEffect(() => {        
         getProduct();
     }, [])
 
@@ -65,7 +59,4 @@ const Home = () => {
         </div>
     )
 }
-
-//falta modificar os nomes para as rotas corretas
-
 export default Home
