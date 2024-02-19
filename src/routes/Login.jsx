@@ -14,7 +14,7 @@ const Login = () => {
             body: user
         })
 
-        navigate("/admin");
+        navigate("/");
     }
 
     return (
@@ -72,5 +72,4 @@ const Login = () => {
     )
 }
 
-//quando o login for feito com sucesso ele chama a rota admin (linha 21 - navigate)
 export default Login
