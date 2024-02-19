@@ -1,0 +1,10 @@
+.product-container h1 {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 2rem 0;
+}
+
+.product-container .product {
+    border: none;
+    margin-bottom: 0;
+}

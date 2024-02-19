@@ -1,0 +1,22 @@
+.navbar {
+    background-color: #17191f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+}
+
+.navbar h2 a {
+    opacity: 1;
+}
+
+.navbar ul{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navbar ul li:hover {
+    font-weight: bold;
+    opacity: 1;
+}
