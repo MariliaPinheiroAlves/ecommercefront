@@ -1,6 +1,6 @@
 import url from "../axios/config";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom"; //simular o redirect para home
+import { useParams, useNavigate } from "react-router-dom";
 import "./NewProduct.css"
 
 const EditProduct = () => {
@@ -12,7 +12,6 @@ const EditProduct = () => {
     const { id } = useParams();
 
     const getProduct = async() => {
-        console.log("TESTANDO")
         const response = await url.get(`/posts/${id}`);
         const data = response.data;
         setTitle(data.title);
@@ -61,19 +60,6 @@ const EditProduct = () => {
                         value={price || ""}
                     />
                 </div>
-                {/* <div className='form-control'>
-                    <label htmlFor="description">Description:</label>
-                    <textarea
-                        name='description'
-                        id='description'
-                        placeholder='Enter product description...'
-                        onChange={(event) => setDescription(event.target.value)}
-                    ></textarea>
-                </div> 
-
-                tá dando problema com o uso de textarea
-                
-                */}
                 <div className='form-control'>
                     <label htmlFor="photo">Photo:</label>
                     <input 
