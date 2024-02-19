@@ -13,9 +13,7 @@ import Order from './routes/Order.jsx'
 import Product from './routes/Product.jsx'
 import EditProduct from './routes/EditProduct.jsx'
 
-//criar um objeto de configuração de roteamento
 const router = createBrowserRouter([
-  //elemento principal que vai abrigar as páginas que eu posso repetir (como barra de navegação/rodapé):
   {
     element: <App/>,
     children: [
@@ -45,11 +43,7 @@ const router = createBrowserRouter([
       },
     ]
   }
-  //nesse caso o element funciona como um "container" e os children como as rotas
-  //as rota "/" carrega todos os produtos e a rota "/new" carrega a rota de createProduct
 ])
-
-//para criar componentes que acessem essas páginas a gente cria a pasta 'routes'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
