@@ -25,10 +25,12 @@ const NavBar = () => {
                 </li>
                 {logged ? (
                     <>
+                    <div className="login">
                         <p>logado com: {user.email}</p>
                         <button onClick={logOut} className="btn">
                             Sair
                         </button>
+                    </div>
                     </>
                 ) : (
                     <>

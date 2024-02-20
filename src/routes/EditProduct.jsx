@@ -1,31 +1,34 @@
 import url from "../axios/config";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import useForm from "../hooks/useForm";
 import "./NewProduct.css"
 
 const EditProduct = () => {
-    const navigate = useNavigate();
-    const [title, setTitle] = useState();
-    const [price, setPrice] = useState();
-    const [description, setDescription] = useState();
+    const {id} = useParams()
+    const name = useForm()
+    const price = useForm()
+    const description = useForm()
 
-    const { id } = useParams();
+    const editProduct = async (event) => {
+        event.preventDefault();
+        const product = {name: name.value, price: price.value, description: description.value};
+
+        try {
+            await url.put(`/product/${id}`, {
+                ...product
+            })
+        } catch (error) {
+            console.log(error);
+        }
+
+
+    }
 
     const getProduct = async() => {
-        const response = await url.get(`/posts/${id}`);
+        const response = await url.get(`/product/${id}`);
         const data = response.data;
-        setTitle(data.title);
-        setPrice(data.price);
     };
-    
-    const editProduct = async(event) => {
-        event.preventDefault();
-        const product = {title, price, description, userId: 1};
-
-        await url.put(`/posts/${id}`, {
-            body: product
-        })
-    }
 
     useEffect(() => {
         getProduct();
@@ -34,7 +37,6 @@ const EditProduct = () => {
     return (
         <div className='new-product'>
             <h1>Editing</h1>
-            <h1>{title}</h1>
             <form onSubmit={(event) => editProduct(event)}>
                 <div className='form-control'>
                     <label htmlFor="title">Name:</label>
@@ -43,9 +45,7 @@ const EditProduct = () => {
                         name="title" 
                         id="title" 
                         placeholder='Name of product'
-                        required
-                        onChange={(event) => setTitle(event.target.value)}
-                        value={title || ""}
+                        {...name}
                     />
                 </div>
                 <div className='form-control'>
@@ -55,17 +55,17 @@ const EditProduct = () => {
                         name="price" 
                         id="price" 
                         placeholder='Price'
-                        required
-                        onChange={(event) => setPrice(event.target.value)}
-                        value={price || ""}
+                        {...price}
                     />
                 </div>
                 <div className='form-control'>
-                    <label htmlFor="photo">Photo:</label>
+                    <label htmlFor="price">Description:</label>
                     <input 
-                        type="file" 
-                        name="photo" 
-                        id="photo" 
+                        type="text" 
+                        name="descricao" 
+                        id="descricao" 
+                        placeholder='Description'
+                        {...description}
                     />
                 </div>
                 <input type="submit" value="Edit product" className='btn'/>

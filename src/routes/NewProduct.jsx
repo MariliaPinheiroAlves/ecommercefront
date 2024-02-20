@@ -1,63 +1,105 @@
-import url from "../axios/config";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import url from "../axios/config"
+
+import { useNavigate } from "react-router-dom"
+import useForm from "../hooks/useForm"
+
 import "./NewProduct.css"
+import { useState } from "react"
 
 const NewProduct = () => {
+    const navigate = useNavigate()
+    const title = useForm()
+    const price = useForm()
+    const description = useForm()
 
-    const navigate = useNavigate();
-    const [title, setTitle] = useState();
-    const [price, setPrice] = useState();
-    const [description, setDescription] = useState();
+    const [imagem, setimagem] = useState(null)
 
-    const createProduct = async (event) => {
-        event.preventDefault();
+    const createProduct = async () => {
+        if (imagem) {
+            try {
+                const form = new FormData()
 
-        const product = {title, price, description, userId: 1};
+                form.append("name", title.value)
+                form.append("description", description.value)
+                form.append("price", price.value)
+                form.append("imagem", imagem.raw)
 
-        await url.post("/posts", {
-            body: product
-        })
+                const response = await url.post("/product", form, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
 
-        navigate("/");
+                navigate("/")
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+    const handleFile = (event) => {
+        const files = event.currentTarget.files
+
+        if (files) {
+            const raw = files[0]
+
+            setimagem({
+                preview: URL.createObjectURL(raw),
+                raw,
+            })
+        }
     }
 
     return (
-        <div className='new-product'>
+        <div className="new-product">
             <h1>Insert new product</h1>
-            <form onSubmit={(event) => createProduct(event)}>
-                <div className='form-control'>
+            <div>
+                <div className="form-control">
                     <label htmlFor="title">Name:</label>
-                    <input 
-                        type="text" 
-                        name="title" 
-                        id="title" 
-                        placeholder='Name of product'
+                    <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        placeholder="Name of product"
                         required
-                        onChange={(event) => setTitle(event.target.value)}
+                        {...title}
                     />
                 </div>
-                <div className='form-control'>
+                <div className="form-control">
+                    <label htmlFor="title">Description:</label>
+                    <input
+                        type="text"
+                        name="description"
+                        id="description"
+                        placeholder="Description of product"
+                        required
+                        {...description}
+                    />
+                </div>
+                <div className="form-control">
                     <label htmlFor="price">Price:</label>
-                    <input 
-                        type="number" 
-                        name="price" 
-                        id="price" 
-                        placeholder='Price'
+                    <input
+                        type="number"
+                        name="price"
+                        id="price"
+                        placeholder="Price"
                         required
-                        onChange={(event) => setPrice(event.target.value)}
+                        {...price}
                     />
                 </div>
-                <div className='form-control'>
+                <div className="form-control">
                     <label htmlFor="photo">Photo:</label>
-                    <input 
-                        type="file" 
-                        name="photo" 
-                        id="photo" 
+                    <input
+                        onChange={handleFile}
+                        type="file"
+                        name="photo"
+                        id="photo"
                     />
                 </div>
-                <input type="submit" value="Create Product" className='btn'/>
-            </form>
+                <button onClick={createProduct} className="btn">
+                    Create Product
+                </button>
+            </div>
         </div>
     )
 }

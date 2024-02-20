@@ -1,15 +1,19 @@
+img {
+    width: 150px;
+}
+
 .home h1 {
     text-transform: uppercase;
     text-align: center;
-    margin-bottom: 1rem;
     padding-top: 1rem;
 }
 
 .product {
+    text-align: justify;
     display: flex;
-    flex-direction: column;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem;
     border-bottom: 1px solid #777;
 }
 
@@ -19,6 +23,10 @@
 
 .product h4 {
     text-transform: uppercase;
+}
+
+.price {
+    font-weight: bold;
 }
 
 .btn {
