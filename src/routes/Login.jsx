@@ -1,12 +1,9 @@
-import { useNavigate } from "react-router-dom"
 import "./NewProduct.css"
 
 import useForm from "../hooks/useForm"
-import { useUserContext } from "../UserContext"
+import { useUserContext } from "../context/UserContext"
 
 const Login = () => {
-    const navigate = useNavigate()
-
     const email = useForm()
     const password = useForm()
 
@@ -15,8 +12,6 @@ const Login = () => {
     const loginUser = async () => {
         try {
             await logIn(email.value, password.value)
-
-            navigate("/")
         } catch (error) {
             console.log(error)
         }
@@ -35,7 +30,8 @@ const Login = () => {
                         id="email"
                         placeholder="Email"
                         required
-                        {...email}
+                        value={email.value}
+                        onChange={email.onChange}
                     />
                 </div>
                 <div className="form-control">
@@ -46,7 +42,8 @@ const Login = () => {
                         id="password"
                         placeholder="Password"
                         required
-                        {...password}
+                        value={password.value}
+                        onChange={password.onChange}
                     />
                 </div>
 

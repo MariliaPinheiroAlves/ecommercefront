@@ -1,0 +1,26 @@
+@keyframes MessageAnimation {
+    from {
+      top: 0;
+      opacity: 0;
+    }
+    to {
+      top: 2rem;
+      opacity: 1;
+    }
+  }
+  
+  .message-container {
+    position: fixed;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: MessageAnimation 0.2s ease-in-out;
+  }
+  
+  .message-message {
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  

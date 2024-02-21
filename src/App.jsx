@@ -1,18 +1,26 @@
-import { Outlet } from "react-router-dom"
 import "./App.css"
+
+import { Outlet } from "react-router-dom"
+import { UserProvider } from "./context/UserContext"
+import { MessageProvider } from "./context/MessageContext"
+
 import NavBar from "./components/NavBar"
-import { UserProvider } from "./UserContext"
+import Message from "./components/Message"
 
 function App() {
     return (
-        <UserProvider>
-            <div className="App">
-                <NavBar />
-                <div className="container">
-                    <Outlet />
+        <MessageProvider>
+            <UserProvider>
+                <div className="App">
+                    <NavBar />
+                    <div className="container">
+                        <Outlet />
+                    </div>
+
+                    <Message />
                 </div>
-            </div>
-        </UserProvider>
+            </UserProvider>
+        </MessageProvider>
     )
 }
 

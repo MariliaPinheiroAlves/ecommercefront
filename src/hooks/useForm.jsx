@@ -7,9 +7,14 @@ const useForm = () => {
         setValue(target.value)
     }
 
+    const setInitalValue = (value) => {
+        setValue(value)
+    }
+
     return {
         value,
         onChange,
+        setInitalValue,
     }
 }
 
