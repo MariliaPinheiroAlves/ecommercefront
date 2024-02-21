@@ -1,10 +1,11 @@
-import url from "../axios/config"
+import "./NewProduct.css"
 
-import { useNavigate } from "react-router-dom"
+import url from "../axios/config"
 import useForm from "../hooks/useForm"
 
-import "./NewProduct.css"
+import { useNavigate } from "react-router-dom"
 import { useState } from "react"
+import { useMessageContext } from "../context/MessageContext"
 
 const NewProduct = () => {
     const navigate = useNavigate()
@@ -13,6 +14,8 @@ const NewProduct = () => {
     const description = useForm()
 
     const [imagem, setimagem] = useState(null)
+
+    const { setMessage } = useMessageContext()
 
     const createProduct = async () => {
         if (imagem) {
@@ -24,15 +27,25 @@ const NewProduct = () => {
                 form.append("price", price.value)
                 form.append("imagem", imagem.raw)
 
-                const response = await url.post("/product", form, {
+                await url.post("/product", form, {
                     headers: {
                         "Content-Type": "multipart/form-data",
                     },
                 })
 
+                setMessage({
+                    value: "Produto adicionado com sucesso",
+                    type: "success",
+                })
+
                 navigate("/")
             } catch (error) {
                 console.log(error)
+
+                setMessage({
+                    value: error.response.data.message,
+                    type: "danger",
+                })
             }
         }
     }
@@ -62,7 +75,8 @@ const NewProduct = () => {
                         id="title"
                         placeholder="Name of product"
                         required
-                        {...title}
+                        value={title.value}
+                        onChange={title.onChange}
                     />
                 </div>
                 <div className="form-control">
@@ -73,7 +87,8 @@ const NewProduct = () => {
                         id="description"
                         placeholder="Description of product"
                         required
-                        {...description}
+                        value={description.value}
+                        onChange={description.onChange}
                     />
                 </div>
                 <div className="form-control">
@@ -84,7 +99,8 @@ const NewProduct = () => {
                         id="price"
                         placeholder="Price"
                         required
-                        {...price}
+                        value={price.value}
+                        onChange={price.onChange}
                     />
                 </div>
                 <div className="form-control">

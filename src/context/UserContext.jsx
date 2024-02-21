@@ -1,12 +1,18 @@
 import React from "react"
 
-import url from "./axios/config"
+import url from "../axios/config"
+import { useMessageContext } from "./MessageContext"
+import { useNavigate } from "react-router-dom"
 
 const UserContext = React.createContext({})
 
 export const UserProvider = ({ children }) => {
+    const navigate = useNavigate()
+
     const [user, setUser] = React.useState(null)
     const [logged, setLogged] = React.useState(false)
+
+    const { setMessage } = useMessageContext()
 
     const logIn = async (email, password) => {
         try {
@@ -20,8 +26,14 @@ export const UserProvider = ({ children }) => {
             localStorage.setItem("token", token)
 
             await autoLogin()
+
+            setMessage({
+                value: "Login realizado com sucesso!",
+                type: "success",
+            })
         } catch (error) {
-            console.log(error)
+            console.log(error.response.data)
+            setMessage({ value: error.response.data.mensagem, type: "danger" })
         }
     }
 
@@ -37,6 +49,7 @@ export const UserProvider = ({ children }) => {
             await logIn(email, password)
         } catch (error) {
             console.log(error)
+            setMessage({ value: error.response.data.mensagem, type: "danger" })
         }
     }
 
@@ -54,6 +67,11 @@ export const UserProvider = ({ children }) => {
         setUser(null)
         setLogged(false)
         localStorage.removeItem("token")
+
+        setMessage({
+            value: "Logout realizado com sucesso!",
+            type: "info",
+        })
     }
 
     const autoLogin = async () => {
@@ -68,6 +86,8 @@ export const UserProvider = ({ children }) => {
 
             setUser(user)
             setLogged(true)
+
+            navigate("/")
         } catch (error) {
             console.log(error)
         }

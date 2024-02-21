@@ -1,12 +1,9 @@
-import { useNavigate } from "react-router-dom"
 import "./NewProduct.css"
 
 import useForm from "../hooks/useForm"
-import { useUserContext } from "../UserContext"
+import { useUserContext } from "../context/UserContext"
 
 const Register = () => {
-    const navigate = useNavigate()
-
     const username = useForm()
     const name = useForm()
     const email = useForm()
@@ -22,8 +19,6 @@ const Register = () => {
                 name.value,
                 username.value
             )
-
-            navigate("/")
         } catch (error) {
             console.log(error)
         }
@@ -41,7 +36,8 @@ const Register = () => {
                         id="username"
                         placeholder="username"
                         required
-                        {...username}
+                        value={username.value}
+                        onChange={username.onChange}
                     />
                 </div>
                 <div className="form-control">
@@ -52,7 +48,8 @@ const Register = () => {
                         id="name"
                         placeholder="Name"
                         required
-                        {...name}
+                        value={name.value}
+                        onChange={name.onChange}
                     />
                 </div>
                 <div className="form-control">
@@ -63,7 +60,8 @@ const Register = () => {
                         id="email"
                         placeholder="Email"
                         required
-                        {...email}
+                        value={email.value}
+                        onChange={email.onChange}
                     />
                 </div>
                 <div className="form-control">
@@ -74,7 +72,8 @@ const Register = () => {
                         id="password"
                         placeholder="Password"
                         required
-                        {...password}
+                        value={password.value}
+                        onChange={password.onChange}
                     />
                 </div>
 
