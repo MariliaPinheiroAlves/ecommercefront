@@ -12,19 +12,19 @@ const NavBar = () => {
             </h2>
 
             <ul>
-                <li>
-                    <Link to={"/"}>Home</Link>
-                </li>
-                <li>
-                    <Link to={"/new"} className="new-btn">
-                        Create product
-                    </Link>
-                </li>
-                <li>
-                    <Link to={"/order"}>Order</Link>
-                </li>
                 {logged ? (
                     <>
+                        <li>
+                            <Link to={"/"}>Home</Link>
+                        </li>
+                        <li>
+                            <Link to={"/new"} className="new-btn">
+                                Create product
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to={"/order"}>Order</Link>
+                        </li>
                         <div className="login">
                             <p>logado com: {user.email}</p>
                             <button onClick={logOut} className="btn">

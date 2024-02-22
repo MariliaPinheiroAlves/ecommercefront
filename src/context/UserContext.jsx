@@ -33,7 +33,7 @@ export const UserProvider = ({ children }) => {
             })
         } catch (error) {
             console.log(error.response.data)
-            setMessage({ value: error.response.data.mensagem, type: "danger" })
+            setMessage({ value: error.response.data.message, type: "danger" })
         }
     }
 
@@ -49,7 +49,7 @@ export const UserProvider = ({ children }) => {
             await logIn(email, password)
         } catch (error) {
             console.log(error)
-            setMessage({ value: error.response.data.mensagem, type: "danger" })
+            setMessage({ value: error.response.data.message, type: "danger" })
         }
     }
 
@@ -72,6 +72,8 @@ export const UserProvider = ({ children }) => {
             value: "Logout realizado com sucesso!",
             type: "info",
         })
+
+        navigate("/")
     }
 
     const autoLogin = async () => {
