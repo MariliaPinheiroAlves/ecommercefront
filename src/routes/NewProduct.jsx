@@ -111,6 +111,7 @@ const NewProduct = () => {
                         name="photo"
                         id="photo"
                     />
+                    {imagem && <img src={imagem.preview} />}
                 </div>
                 <button onClick={createProduct} className="btn">
                     Create Product

@@ -7,7 +7,6 @@ import url from "../axios/config"
 import "./Order.css"
 
 const Order = () => {
-
     const [order, setOrder] = useState([])
 
     const { setMessage } = useMessageContext()
@@ -41,20 +40,33 @@ const Order = () => {
     }, [deleteOrder])
 
     const newDate = (dataString) => {
-        let data = new Date(dataString);
+        const data = new Date(dataString)
 
-        const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
-        
-        let dia = data.getDate();
-        let mes = meses[data.getMonth()];
-        let ano = data.getFullYear();
-        let hora = data.getHours();
-        let minutos = data.getMinutes();
-        let segundos = data.getSeconds();
-        
-        let dataFormatada = dia + ' de ' + mes + ' de ' + ano + ' às ' + hora + ':' + minutos + ':' + segundos;
-        
-        return dataFormatada;
+        const meses = [
+            "Janeiro",
+            "Fevereiro",
+            "Março",
+            "Abril",
+            "Maio",
+            "Junho",
+            "Julho",
+            "Agosto",
+            "Setembro",
+            "Outubro",
+            "Novembro",
+            "Dezembro",
+        ]
+
+        const dia = data.getDate()
+        const mes = meses[data.getMonth()]
+        const ano = data.getFullYear()
+        const hora = data.getHours()
+        const minutos = data.getMinutes()
+        const segundos = data.getSeconds()
+
+        const dataFormatada = `${dia} de ${mes} de ${ano} às ${hora}:${minutos}:${segundos}`
+
+        return dataFormatada
     }
 
     return (
@@ -63,34 +75,42 @@ const Order = () => {
             {order.length === 0 ? (
                 <div className="new-order">
                     <p>Oops.. por enquanto nenhum pedido</p>
-                    <Link to={"/order/add"} className="btn">Criar um novo pedido</Link>
+                    <Link to={"/order/add"} className="btn">
+                        Criar um novo pedido
+                    </Link>
                 </div>
             ) : (
                 <div className="order-container">
                     {order.map((order) => (
-                        <div key={order.id}>
+                        <div key={order.id} className="order-wrapper">
                             <div className="order">
-                                <span>Order ID: {order.id}</span>
-                                <p>User ID: {order.id_usuario}</p>
-                                <p>Product ID: {order.id_produto}</p>
-                                <p>Order date: {newDate(order.data_pedido)}</p>
-                                <button
-                                    onClick={() =>
-                                            deleteOrder(order.id)
-                                        }
-                                    className="btn delete-btn">
-                                        Delete order
-                                    </button>
+                                <img
+                                    src={`http://localhost:5000/${order.imagem_produto}`}
+                                />
+                                <div>
+                                    <span>Order ID: {order.id_pedido}</span>
+                                    <p>User: {order.email_usuario}</p>
+                                    <p>Product: {order.nome_produto}</p>
+                                    <p>
+                                        Order date: {newDate(order.data_pedido)}
+                                    </p>
+                                </div>
                             </div>
+                            <button
+                                onClick={() => deleteOrder(order.id_pedido)}
+                                className="btn delete-btn"
+                            >
+                                Delete order
+                            </button>
                         </div>
                     ))}
-                    <Link to={"/order/add"} className="btn">Create new order</Link>
+                    <Link to={"/order/add"} className="btn">
+                        Create new order
+                    </Link>
                 </div>
             )}
         </div>
-    );
-    
-    
+    )
 }
 
 export default Order

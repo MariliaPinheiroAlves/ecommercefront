@@ -1,8 +1,23 @@
-# React + Vite
+# About
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o frontend da aplicação final do módulo avançado de Express da Ada Tech. Neste módulo, fomos desafiados a desenvolver um modelo de API de e-commerce e consumi-lo por meio de uma aplicação frontend.
 
-Currently, two official plugins are available:
+# Getting started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Para este projeto funcionar adequadamente com suas funções é necessário estar com o [backend](https://github.com/mariliaPinheiroAlves/ecommerce) rodando.
+
+```shell
+# 1. Clone o projeto
+
+git clone https://github.com/MariliaPinheiroAlves/ecommercefront
+
+cd ecommercefront
+
+# 2. Instale as dependências
+
+npm install
+
+# 3. Execute a aplicação
+
+npm run dev
+```
