@@ -13,6 +13,7 @@ import Order from "./routes/Order.jsx"
 import Product from "./routes/Product.jsx"
 import EditProduct from "./routes/EditProduct.jsx"
 import Register from "./routes/Register.jsx"
+import NewOrder from "./routes/NewOrder.jsx"
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             {
                 path: "/order",
                 element: <Order />,
+            },
+            {
+                path: "/order/add",
+                element: <NewOrder />
             },
             {
                 path: "/login",
